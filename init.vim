@@ -1,0 +1,139 @@
+set nocompatible
+filetype on
+set number
+set tabstop=4
+set shiftwidth=4
+set expandtab     "convert tabs to spaces
+set wrap
+
+
+" Enable syntax highlighting
+syntax enable
+
+" Automatically enter insert mode when opening a file
+autocmd BufReadPost * startinsert
+
+"=========[ General shortcuts ]=========="
+
+" Map Ctrl+S to save the file
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>gi
+vnoremap <C-s> <Esc>:w<CR>gv
+
+" Map Ctrl+X to quit Neovim (twice to force quit)
+nnoremap <C-x> :q<CR>
+inoremap <C-x> <Esc>:q<CR>
+vnoremap <C-x> <Esc>:q<CR>
+nnoremap <C-x><C-x> :q!<CR>
+
+" Delete current line (insert mode) with ctrl+d
+inoremap <C-d> <Esc>ddi
+
+" Map Ctrl+F to start search in the file
+nnoremap <C-f> /
+inoremap <C-f> <Esc>/
+vnoremap <C-f> <Esc>/
+set incsearch    " Show matches while typing
+set hlsearch     " Highlight all matches after searching
+
+" nnoremap <Down> n
+" nnoremap <Up> N
+
+
+" Map Escape twice to clear search highlights + redraw screen
+nnoremap <Esc><Esc> :let @/ = ""<Bar>redraw!<CR>
+
+" Scope collapsing logic
+" options: syntax, marker, indent...
+set foldmethod=marker
+set foldmarker={,}
+set foldlevel=99   " no default folds
+
+inoremap <C-l> <Esc>zczk4ji
+inoremap <C-o> <Esc>zoi
+
+"=========[ Editing ]==========="
+
+" Swap current line with the one above on Ctrl+Up in insert mode
+inoremap <A-Up> <Esc>:m .-2<CR>==gi
+
+" Swap current line with the one below on Ctrl+Down in insert mode
+inoremap <A-Down> <Esc>:m .+1<CR>==gi
+
+
+"=========[ Movement ]=========="
+
+" Disable Shift+Arrow keys (to stop them from rapid scrolling)
+" TODO: check if disabling before re-assigning is actually necessary.
+nnoremap <S-Left>  <Nop>
+nnoremap <S-Right> <Nop>
+nnoremap <S-Up>    <Nop>
+nnoremap <S-Down>  <Nop>
+
+" Shift+Arrow Keys for highlighting in insert mode
+inoremap <S-Left>  <Esc>v<Left>
+inoremap <S-Right> <Esc>v<Right>
+inoremap <S-Up>    <Esc>v<Up>
+inoremap <S-Down>  <Esc>v<Down>
+
+" Use Ctrl+Arrow for rapid scrolling
+nnoremap <C-Down> 5j      " Scroll down rapidly
+nnoremap <C-Up>   5k      " Scroll up rapidly
+
+inoremap <C-Down> <Esc>5ji
+inoremap <C-Up>   <Esc>5ki
+
+" Map start of line to end prior line
+inoremap <expr> <Left>  col('.') == 1 ? "\<Esc>kA" : "\<Left>"
+inoremap <expr> <Right> col('.') >= col('$') - 1 ? "\<Esc>j0i" : "\<Right>"
+
+nnoremap <expr> <Left> col('.') == 1 ? "k$" : "h"
+nnoremap <expr> <Right> col('.') >= col('$') - 1 ? "\<Esc>j0" : "\<Right>"
+
+
+"=========[ Copy-Paste ]=========="
+
+" Copy selected text with Ctrl+C in visual mode
+" Using the system clipboard because of "+ ; this requires installing xclip
+vnoremap <C-c> "+y
+
+" Copy entire line with Ctrl+C in normal mode
+nnoremap <C-c> yy
+
+" Cut selection with Ctrl+K in visual mode
+" vnoremap <C-k> d
+
+" Paste with Ctrl+V in normal and visual mode
+nnoremap <C-v> "+p
+vnoremap <C-v> "+p
+
+" Map Ctrl+K, Ctrl+C to comment selected lines
+" vnoremap <C-K><C-C> :<C-u>'<,'>normal I//<CR>
+
+" vnoremap <C-K><C-C> <Esc>^i//
+" vnoremap <C-K><C-U> <Esc>^2dl
+
+vnoremap <C-K><C-C> :s/^/\/\//<CR>gv
+vnoremap <C-K><C-U> :s/^\/\/<CR>gv
+
+"=========[ Plugins ]=========="
+
+" Initialize vim-plug
+call plug#begin('~/.local/share/nvim/plugged')
+
+" Add syntax highlighting for some languages:
+Plug 'ziglang/zig.vim'
+au BufRead,BufNewFile Vagrantfile set filetype=ruby " Treat Vagrantfiles as Ruby
+
+" Colors
+Plug 'dracula/vim', { 'as': 'dracula' }
+
+" Initialize plugin system
+call plug#end()
+
+" Enable true color support
+set termguicolors
+set background=dark
+colorscheme dracula
+
+
