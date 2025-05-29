@@ -116,21 +116,6 @@ vnoremap <C-v> "+p
 vnoremap <C-K><C-C> :s/^/\/\//<CR>gv
 vnoremap <C-K><C-U> :s/^\/\/<CR>gv
 
-"=========[ Plugins ]=========="
-
-" Initialize vim-plug
-call plug#begin('~/.local/share/nvim/plugged')
-
-" Add syntax highlighting for some languages:
-Plug 'ziglang/zig.vim'
-au BufRead,BufNewFile Vagrantfile set filetype=ruby " Treat Vagrantfiles as Ruby
-
-" Colors
-Plug 'dracula/vim', { 'as': 'dracula' }
-
-" Initialize plugin system
-call plug#end()
-
 " Enable true color support
 set termguicolors
 set background=dark

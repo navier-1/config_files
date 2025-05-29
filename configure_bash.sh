@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 echo "export PS1='\[\e[32m\]\u@\h:[\W]\[\e[0m\]$ '" >> ~/.bashrc
 
 # Aliases
@@ -7,6 +9,17 @@ echo "alias nuke='rm -rf'" >> ~/.bashrc
 echo "alias python='python3'" >> ~/.bashrc 
 echo "alias l='ls'" >> ~/.bashrc
 echo "alias ll='ls -lh'" >> ~/.bashrc
+
+# Set dark mode (GNOME shell)
+# Get the default profile ID
+PROFILE_ID=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
+
+# Set the dark theme preference
+gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
+
+# Optional: ensure the profile uses built-in dark colors
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$PROFILE_ID/ use-theme-colors true
+
 
 echo "Done. Source ~/.bashrc"
 
