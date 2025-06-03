@@ -1,0 +1,10 @@
+#!/bin/bash
+
+awk 'BEGIN {c=0;} /BEGIN CERTIFICATE/ {c++} {print > "/tmp/cert" c ".crt"}' /etc/ssl/certs/ca-certificates.crt
+
+for f in /tmp/cert*.crt; do
+    echo ">>> $f"
+    openssl x509 -in "$f" -text -noout
+    echo ""
+done
+
