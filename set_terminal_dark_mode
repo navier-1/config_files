@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Get the default profile ID
+PROFILE_ID=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
+
+# Set the dark theme preference
+gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
+
+# Optional: ensure the profile uses built-in dark colors
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$PROFILE_ID/ use-theme-colors true
+
+
