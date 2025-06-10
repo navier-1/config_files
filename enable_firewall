@@ -1,8 +1,0 @@
-#!/bin/bash
-
-cp -f ./firewall_confs/firewall.conf /etc/nftables.conf
-
-sudo nft -f /etc/nftables.conf
-
-
-
