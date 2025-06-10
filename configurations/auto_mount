@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+echo "Enter server IP address"
+read -rp "IP: " IP
+
+echo "Enter the remote share path (e.g. /etc/share)"
+read -rp "Path: " REMOTE_PATH
+
+echo "Enter the filesystem (ext4, nfs,...)"
+DEFAULT_FILESYSTEM="nfs"
+read -rp "Filesystem [$DEFAULT_FILESYSTEM]": FILESYSTEM
+FILESYSTEM=${FILESYSTEM:-$DEFAULT_FILESYSTEM}
+
+echo "Enter the local mountpoint"
+read -rp "Mount point [/mnt]: " MOUNT
+MOUNT=${MOUNT:-"/mnt"}
+
+# TODO: check if you can edit better, e.g. to remove the automount later
+echo "Adding the following mount in /etc/fstab:"
+echo "$IP:$REMOTE_PATH $MOUNT $FILESYSTEM defaults 0 0" | sudo tee -a /etc/fstab
+
+#$ sudo echo nano /etc/fstab
+#    <server-ip>:/path/to/share /mount/point nfs defaults 0 0
+#  e.g.
+#    192.168.1.2:/srv/nfs/shared /mnt nfs defaults 0 0

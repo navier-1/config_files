@@ -9,6 +9,10 @@ set wrap
 
 " Enable syntax highlighting
 syntax enable
+filetype on
+filetype plugin on
+filetype indent on
+
 
 " Automatically enter insert mode when opening a file
 autocmd BufReadPost * startinsert

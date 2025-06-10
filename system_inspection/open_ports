@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#ss -tuln
+ss -tuln | awk '{print $5}' | grep -o ':[0-9]*$' | cut -d: -f2 | sort -n | uniq
+
+# To check processes, too
+# ss -tulnp
+
