@@ -1,11 +1,16 @@
 #!/bin/bash
+set -e
 
 # share clipboard with system
 sudo apt install xclip
 
-mkdir -p ~/.vim/pack/themes/start
-cd ~/.vim/pack/themes/start
-git clone https://github.com/dracula/vim.git dracula
+if [ ! -d ~/.vim/pack/themes/start ]; then
+  mkdir -p ~/.vim/pack/themes/start
+fi
 
-cp vimrc ~/.vimrc
+if [ ! -d ~/.vim/pack/themes/start/dracula ]; then
+  git clone https://github.com/dracula/vim.git  ~/.vim/pack/themes/start/dracula
+fi
+
+cp -f vimrc ~/.vimrc
 
