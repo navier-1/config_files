@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#sudo apt install nvidia-driver nvidia-vulkan-icd
+sudo apt install mesa-vulkan-drivers
+
+

@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+sudo apt install winetricks
+winetricks directx9 corefonts
+   
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+# TODO: make this an interactive script, like the one that fetches docker
+# Add backports repository
+# NOTE: On Debian 10, replace stretch with buster; on Debian 11 replace it with bullseye
+echo deb http://http.debian.net/debian stretch-backports main contrib non-free > /etc/apt/sources.list.d/stretch-backports.list
+sudo apt update
+sudo apt install -t stretch-backports firmware-linux
+
