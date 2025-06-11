@@ -4,12 +4,19 @@ set -e
 # share clipboard with system
 sudo apt install xclip
 
-if [ ! -d ~/.vim/pack/themes/start ]; then
-  mkdir -p ~/.vim/pack/themes/start
-fi
+read -p "Add the 'dracula' theme? [y/N]: " response
+if [[ $response == [Yy] ]]; then
 
-if [ ! -d ~/.vim/pack/themes/start/dracula ]; then
-  git clone https://github.com/dracula/vim.git  ~/.vim/pack/themes/start/dracula
+  if [ ! -d ~/.vim/pack/themes/start ]; then
+    mkdir -p ~/.vim/pack/themes/start
+  fi
+
+  if [ ! -d ~/.vim/pack/themes/start/dracula ]; then
+    git clone https://github.com/dracula/vim.git  ~/.vim/pack/themes/start/dracula
+  fi
+
+  echo "colorscheme dracula" >> vimrc
+
 fi
 
 cp -f vimrc ~/.vimrc

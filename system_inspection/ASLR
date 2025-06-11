@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Guide:"
+echo " 0 - disabled"
+echo " 1 - partial (stack, heap and mmapped regions)"
+echo " 2 - full"
+echo ""
+cat /proc/sys/kernel/randomize_va_space
+

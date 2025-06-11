@@ -123,6 +123,4 @@ vnoremap <C-K><C-U> :s/^\/\/<CR>gv
 " Enable true color support
 set termguicolors
 set background=dark
-colorscheme dracula
-
 
